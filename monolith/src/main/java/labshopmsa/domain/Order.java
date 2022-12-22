@@ -57,10 +57,10 @@ public class Order  {
 
         labshopmsa.external.DecreaseStockCommand decreaseStockCommand = new labshopmsa.external.DecreaseStockCommand();
         // mappings goes here
+        decreaseStockCommand.setQty(getQty()); //here        
+        
         MonolithApplication.applicationContext.getBean(labshopmsa.external.InventoryService.class)
-            .decreaseStock(/* get???(), */ decreaseStockCommand);
-
-
+            .decreaseStock(Long.valueOf(getProductId()),decreaseStockCommand);            
 
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
